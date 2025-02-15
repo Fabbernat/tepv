@@ -1,35 +1,41 @@
-def shortest_common_supersequence(a: str, b: str) -> str:
-    n, m = len(a), len(b)
-    dp = [[0] * (m + 1) for _ in range(n + 1)]
+def f(n, b, d):
+    c = 0
+    while n > 0:
+        if n % b == d:
+            c += 1
+        n //= b
+    return c
 
-    for i in range(1, n + 1):
-        for j in range(1, m + 1):
-            if a[i - 1] == b[j - 1]:
-                dp[i][j] = dp[i - 1][j - 1] + 1
-            else:
-                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
 
-    result = []
-    i, j = n, m
-    while i > 0 or j > 0:
-        if i > 0 and j > 0 and a[i - 1] == b[j - 1]:
-            result.append(a[i - 1])
-            i -= 1
-            j -= 1
-        elif j > 0 and (i == 0 or dp[i][j - 1] >= dp[i - 1][j]):
-            result.append(b[j - 1])
-            j -= 1
-        else:
-            result.append(a[i - 1])
-            i -= 1
+def solve():
+    n, d = map(int, input().split())
+    m = 0
 
-    return "".join(reversed(result))
+    # Handle small n cases (same as before)
+    for b in range(max(2, d + 1), min(n, 10 ** 6) + 1):
+        if d >= b:
+            continue
+        m = max(m, f(n, b, d))
 
-def main():
-    name1 = input().strip()
-    name2 = input().strip()
-    print(shortest_common_supersequence(name1, name2))
+    # Handle large n cases: check bases close to n
+    if n > 10 ** 6:  # Only do this if n is large.
+        for b in range(max(2, d + 1), min(n, int(n ** 0.5) * 100) + 1):
+            if d >= b:
+                continue
+            m = max(m, f(n, b, d))
+
+        for b in range(max(2, d + 1), min(n, int(n / 2) + 1) + 1):
+            if d >= b:
+                continue
+            m = max(m, f(n, b, d))
+
+        for b in range(max(n - 1000, 2), n + 1):  # Check bases very close to n
+            if b < d + 1:
+                continue
+            m = max(m, f(n, b, d))
+
+    print(m)
 
 
 if __name__ == "__main__":
-    main()
+    solve()

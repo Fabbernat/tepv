@@ -1,32 +1,19 @@
-from sys import stdin
+def f(n,b,d):
+    c=0
+    while n>0:
+        if n%b==d:
+            c+=1
+        n//=b
+    return c
 
+def solve():
+    n,d=map(int,input().split())
+    m=0
+    for b in range(max(2,d+1),min(n+1,10**6)+1):
+        if d>=b:
+            continue
+        m=max(m,f(n,b,d))
+    print(m)
 
-def atvalt(N, base, D):
-    if N == 0:
-        return 1 if D == 0 else 0
-
-    count = 0
-    num = N
-
-    while num > 0:
-        digit = num % base
-        if digit == D:
-            count += 1
-        num //= base
-
-    return count
-
-
-def main():
-    N = int(stdin.readline().strip())
-    D = int(stdin.readline().strip())
-
-    total_count = 0
-    for i in range(2, N + 1):
-        total_count += atvalt(N, i, D)
-
-    print(total_count)
-
-
-if __name__ == '__main__':
-    main()
+if __name__=="__main__":
+    solve()

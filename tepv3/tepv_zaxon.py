@@ -1,4 +1,4 @@
-import sys
+from sys import stdin
 
 
 def all_characters_are_unique(s: str) -> bool:
@@ -15,8 +15,8 @@ def filter_names(names: list) -> list:
 
 
 def main():
-    n = int(sys.stdin.readline().strip())
-    names = [sys.stdin.readline().strip() for _ in range(n)]
+    n = int(stdin.readline().strip())
+    names = [stdin.readline().strip() for _ in range(n)]
     # print(names)
 
     filtered_names = filter_names(names)

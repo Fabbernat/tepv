@@ -6,7 +6,7 @@ class Song:
         self.d = d
         self.p = 0
 
-def solve():
+def main():
     q = int(stdin.readline())
     pl = []
     s = {}
@@ -50,4 +50,4 @@ def solve():
             print(s[n].p if n in s else 0)
 
 if __name__ == "__main__":
-    solve()
+    main()

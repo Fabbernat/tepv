@@ -7,7 +7,7 @@ def f(n, b, d):
     return c
 
 
-def solve():
+def main():
     n, d = map(int, input().split())
     m = 0
 
@@ -38,4 +38,4 @@ def solve():
 
 
 if __name__ == "__main__":
-    solve()
+    main()

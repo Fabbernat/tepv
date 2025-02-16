@@ -6,7 +6,7 @@ def f(n,b,d):
         n//=b
     return c
 
-def solve():
+def main():
     n,d=map(int,input().split())
     m=0
     for b in range(max(2,d+1),min(n+1,10**6)+1):
@@ -16,4 +16,4 @@ def solve():
     print(m)
 
 if __name__=="__main__":
-    solve()
+    main()
